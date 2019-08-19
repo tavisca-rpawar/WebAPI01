@@ -22,16 +22,16 @@ pipeline {
             defaultValue: '')
         string(
             name:'DOCKER_USER_ID',
-			defaultValue:'anoop2677')
+	    defaultValue:'rupawar')
         password(
             name:'DOCKER_PASSWORD',
-			defaultValue:'0@noopkum@r')
+	    defaultValue:'adminadmin')
         string(
             name: 'BUILD_VERSION',
             defaultValue: '1.0')
         string(
             name: 'REPOSITORY',
-            defaultValue: 'webAPI')
+            defaultValue: 'firstrepo-1.0')
         
     }
     stages {
@@ -66,10 +66,10 @@ pipeline {
             }
             steps{	
                 bat script: '''
-		docker build . -t rupawar/firstrepo-1.0
-                docker login -u rupawar -p adminadmin
-                docker push rupawar/firstrepo-1.0
-		docker run rupawar/firstrepo-1.0 -p 5000:80
+		docker build . -t %DOCKER_USER_ID%/%REPOSITORY%
+                docker login -u %DOCKER_USER_ID% -p %DOCKER_PASSWORD%
+                docker push %DOCKER_USER_ID%/%REPOSITORY%
+		docker run %DOCKER_USER_ID%/%REPOSITORY% -p 5000:80
                 '''
 			}				 
         } 
