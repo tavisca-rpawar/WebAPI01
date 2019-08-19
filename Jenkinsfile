@@ -66,9 +66,8 @@ pipeline {
             }
             steps{	
                 bat script: '''
-		docker build --tag=firsttag .
+		docker build . -t rupawar/firstrepo-1.0
                 docker login -u rupawar -p adminadmin
-                docker push tag firsttag rupawar/firstrepo-1.0
                 docker push rupawar/firstrepo-1.0
 		docker run rupawar/firstrepo-1.0 -p 5000:5505
                 '''
