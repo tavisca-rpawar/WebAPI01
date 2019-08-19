@@ -47,7 +47,7 @@ pipeline {
             }
             steps {
                 bat script: '''dotnet %NETCORE_VERSION% restore %SOLUTION_NAME%
-                dotnet %NETCORE_VERSION% build %SOLUTION_NAME% -p:CONFIGURATION=release -V:n'''
+                dotnet %NETCORE_VERSION% build %SOLUTION_NAME% -p:CONFIGURATION=release -V:q'''
             }
         }
         stage('Test') {
