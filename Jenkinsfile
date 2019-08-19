@@ -85,12 +85,12 @@ pipeline {
 			}				 
         } 
     }
-    post {
+   /* post {
             always {
 		    bat script:'''
 		    docker logout
 		    '''
                 deleteDir()
             }
-        }
+        }*/
 }
