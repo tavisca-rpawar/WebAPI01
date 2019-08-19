@@ -32,6 +32,12 @@ pipeline {
         string(
             name: 'REPOSITORY',
             defaultValue: 'firstrepo-1.0')
+	string(
+            name: 'HOST_PORT',
+            defaultValue: '5000')
+	string(
+            name: 'CONTAINER_PORT',
+            defaultValue: '80')
         
     }
     stages {
@@ -69,7 +75,7 @@ pipeline {
 		docker build . -t %DOCKER_USER_ID%/%REPOSITORY%
                 docker login -u %DOCKER_USER_ID% -p %DOCKER_PASSWORD%
                 docker push %DOCKER_USER_ID%/%REPOSITORY%
-		docker run %DOCKER_USER_ID%/%REPOSITORY% -p 5000:80
+		docker run %DOCKER_USER_ID%/%REPOSITORY% -p %HOST_PORT%:%CONTAINER_PORT%
                 '''
 			}				 
         } 
