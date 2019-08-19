@@ -40,8 +40,8 @@ pipeline {
                 expression {params.CHOSEN_ACTION == 'BUILD' || params.CHOSEN_ACTION == 'TEST' || params.CHOSEN_ACTION == 'PUBLISH'}
             }
             steps {
-                bat script: '''dotnet %NETCORE_VERSION% restore  %SOLUTION_NAME% --source https://api.nuget.org/v3/index.json
-                dotnet %NETCORE_VERSION% build  %SOLUTION_NAME% -p:CONFIGURATION=release -V:n'''
+                bat script: '''dotnet %NETCORE_VERSION% restore %SOLUTION_NAME%
+                dotnet %NETCORE_VERSION% build %SOLUTION_NAME% -p:CONFIGURATION=release -V:n'''
             }
         }
         stage('Test') {
@@ -70,7 +70,7 @@ pipeline {
                 docker login -u rupawar -p adminadmin
                 docker push tag firsttag rupawar/firstrepo-1.0
                 docker push rupawar/firstrepo-1.0
-		docker run --name firstrepo-1.0 -p 5000:5505 firsttag
+		docker run --name rupawar/firstrepo-1.0 -p 5000:5505
                 '''
 			}				 
         } 
