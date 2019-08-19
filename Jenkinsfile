@@ -46,7 +46,9 @@ pipeline {
                 expression {params.CHOSEN_ACTION == 'BUILD' || params.CHOSEN_ACTION == 'TEST' || params.CHOSEN_ACTION == 'PUBLISH'}
             }
             steps {
-                bat script: '''dotnet %NETCORE_VERSION% restore %SOLUTION_NAME%
+                bat script: '''
+		dotnet C:\sonar\SonarScanner.MSBuild.dll begin /k:"WebApi" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="4d3652d0c2c6cad8764005b374b37562ef06df79"
+		dotnet %NETCORE_VERSION% restore %SOLUTION_NAME%
                 dotnet %NETCORE_VERSION% build %SOLUTION_NAME% -p:CONFIGURATION=release -V:q'''
             }
         }
@@ -55,7 +57,10 @@ pipeline {
                 expression {params.CHOSEN_ACTION == 'TEST' || params.CHOSEN_ACTION == 'PUBLISH'}
             }
             steps {
-                bat script: '''dotnet %NETCORE_VERSION% test  %TEST_PROJECT_PATH%'''
+                bat script: '''
+			dotnet %NETCORE_VERSION% test  %TEST_PROJECT_PATH%
+			dotnet C:\sonar\SonarScanner.MSBuild.dll end /d:sonar.login="4d3652d0c2c6cad8764005b374b37562ef06df79"
+		'''
             }
         }
         stage('Publish') {
