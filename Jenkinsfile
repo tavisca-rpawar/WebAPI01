@@ -80,7 +80,7 @@ pipeline {
 		docker build . -t %DOCKER_USER_ID%/%REPOSITORY%
                 docker login -u %DOCKER_USER_ID% -p %DOCKER_PASSWORD%
                 docker push %DOCKER_USER_ID%/%REPOSITORY%
-		docker run %DOCKER_USER_ID%/%REPOSITORY% -p %HOST_PORT%:%CONTAINER_PORT%
+		/*docker run %DOCKER_USER_ID%/%REPOSITORY% -p %HOST_PORT%:%CONTAINER_PORT%*/
                 '''
 			}				 
         } 
